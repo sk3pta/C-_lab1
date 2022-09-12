@@ -23,6 +23,7 @@
     {
         private List<Point> points = new List<Point>();
 
+        /*
         public Figure(Point p1, Point p2, Point p3)
         {
             points.Add(p1);
@@ -47,7 +48,20 @@
             points.Add(p5);
         }
 
-        public double Length(Point p1, Point p2)
+        */
+
+        public Figure(params Point[] par)
+        {
+            points = new List<Point>();
+            for (int x = 0; x < par.Length; ++x)
+            {
+                points.Add(new Point(par[x].X, par[x].Y, par[x].Name));
+            }
+        }
+
+
+
+        public static double Length(Point p1, Point p2)
         {
             return System.Math.Sqrt((p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y));
         }
@@ -104,9 +118,21 @@
                                     ,int.Parse(input.Split(" ")[1]),
                                      figureName)
                     );
-
-
             }
+
+            Figure fig;
+       
+            if (points.Count == 3) {   fig = new Figure(points[0], points[1], points[2]);
+            }
+            else if (points.Count == 4) {  fig = new Figure(points[0], points[1], points[2], points[3]); }
+            else  {  fig = new Figure(points[0], points[1], points[2], points[3], points[4]); }
+
+
+            Console.WriteLine($"Figure {figureName} has been created!" + $"It's perimeter equals {fig.Perimeter:.##}");
+
+
+
+
         }
     }
 }
